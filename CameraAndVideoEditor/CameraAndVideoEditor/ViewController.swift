@@ -13,7 +13,10 @@ import AVKit
 
 class ViewController: UIViewController {
     
+    let controller = VideoPlayer()
     var camera:VideoCamera!
+    var urls:[URL] = [URL]()
+    var savedImage:[UIImage] = [UIImage]()
     
     var record:UIButton = {
        
@@ -40,6 +43,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = .white
+        controller.delegate = self
         
         camera = VideoCamera(delegate: self)
         camera.setPreviewLayer(view: view)
@@ -59,10 +63,10 @@ class ViewController: UIViewController {
     
     @objc
     private func capture(){
-        
+//        camera.capture()
         if !self.camera.videoOutput.isRecording{
             record.setTitle("Stop", for: .normal)
-            camera.startRecord()
+            camera.startRecord(tmpFile: "tmp-\(self.urls.count).mov")
         }else{
             record.setTitle("Record", for: .normal)
             camera.stopRecord()
@@ -85,7 +89,23 @@ extension ViewController : AVCapturePhotoCaptureDelegate{
         
         if let imageData = photo.fileDataRepresentation(){
             
-            UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
+//            UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
+            
+            savedImage.append(UIImage(data: imageData)!)
+            
+            if savedImage.count > 2{
+                
+                let editor = VideoEditor()
+                editor.createVideo(images: savedImage) { (url) in
+
+                    DispatchQueue.main.async {
+                        self.controller.setVideoLayer(url: url)
+                        self.present(self.controller, animated: true, completion: nil)
+                    }
+                    
+                }
+                
+            }
             
         }
         
@@ -97,10 +117,27 @@ extension ViewController : AVCaptureFileOutputRecordingDelegate{
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
 
-        let controller = VideoPlayer()
-        controller.setVideoLayer(url: outputFileURL)
-        self.present(controller, animated: true, completion: nil)
+//        self.urls.append(outputFileURL)
+        let editor = VideoEditor()
+        editor.add(videos: AVAsset(url: outputFileURL)) { (url) in
+            DispatchQueue.main.async {
+                self.controller.setVideoLayer(url: url)
+                self.present(self.controller, animated: true, completion: nil)
+            }
+        }
         
+    }
+    
+}
+
+extension ViewController: VideoPlayerDelegate {
+    
+    func observerProgess(seconds: Double, durationSeconds: Double, progess: Double) {
+        return
+    }
+    
+    func videoDidEnd() {
+        controller.replay()
     }
     
 }

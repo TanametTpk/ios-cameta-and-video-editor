@@ -16,7 +16,6 @@ class VideoCamera:Camera{
     var audioDevice: AVCaptureDeviceInput?
     var videoOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     
-    var tmpFile:String = "tmp.mov"
     var delegate: AVCaptureFileOutputRecordingDelegate!
     
     init(delegate:AVCaptureFileOutputRecordingDelegate) {
@@ -41,26 +40,15 @@ class VideoCamera:Camera{
         
     }
     
-    public func startRecord(){
+    public func startRecord(tmpFile:String = "tmp.mov"){
         
-        let url = getUrl()
+        let url = FileManager.default.getTempFileUrl(path: tmpFile)
         videoOutput.startRecording(to: url, recordingDelegate: delegate)
         
     }
     
     public func stopRecord(){
         videoOutput.stopRecording()
-    }
-    
-    private func getUrl() -> URL{
-        
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fileUrl = paths[0].appendingPathComponent(tmpFile)
-        
-        try? FileManager.default.removeItem(at: fileUrl)
-        
-        return fileUrl
-        
     }
     
 }
