@@ -29,6 +29,11 @@ class VideoPlayer:UIViewController {
         setup()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.clear()
+    }
+    
     private func setup(){
         
         view.addSubview(videoLayer)
@@ -139,6 +144,13 @@ class VideoPlayer:UIViewController {
         
         reset()
         play()
+        
+    }
+    
+    public func clear(){
+        
+        videoLayer.playerLayer.player?.cancelPendingPrerolls()
+        videoLayer.playerLayer.player = nil
         
     }
     

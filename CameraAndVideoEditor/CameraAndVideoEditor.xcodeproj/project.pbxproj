@@ -14,6 +14,9 @@
 		09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8242287BB2300ACF621 /* VideoPlayer.swift */; };
 		09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8272287C65900ACF621 /* VideoLayer.swift */; };
 		09EDC82A2287C68100ACF621 /* VideoPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */; };
+		09EDC82E2287D42A00ACF621 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC82D2287D42A00ACF621 /* Camera.swift */; };
+		09EDC8302287D99A00ACF621 /* VideoCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC82F2287D99A00ACF621 /* VideoCamera.swift */; };
+		09EDC8322287DD5600ACF621 /* PictureCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8312287DD5600ACF621 /* PictureCamera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		09EDC8242287BB2300ACF621 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		09EDC8272287C65900ACF621 /* VideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayer.swift; sourceTree = "<group>"; };
 		09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerDelegate.swift; sourceTree = "<group>"; };
+		09EDC82D2287D42A00ACF621 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		09EDC82F2287D99A00ACF621 /* VideoCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCamera.swift; sourceTree = "<group>"; };
+		09EDC8312287DD5600ACF621 /* PictureCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCamera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,8 @@
 		09EDC8112287B28600ACF621 /* CameraAndVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				09EDC82C2287C76600ACF621 /* Camera */,
+				09EDC82B2287C73400ACF621 /* VideoEditor */,
 				09EDC8262287C62D00ACF621 /* VideoPlayer */,
 				09EDC8122287B28600ACF621 /* AppDelegate.swift */,
 				09EDC8142287B28600ACF621 /* ViewController.swift */,
@@ -76,6 +84,23 @@
 				09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */,
 			);
 			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		09EDC82B2287C73400ACF621 /* VideoEditor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoEditor;
+			sourceTree = "<group>";
+		};
+		09EDC82C2287C76600ACF621 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				09EDC82D2287D42A00ACF621 /* Camera.swift */,
+				09EDC82F2287D99A00ACF621 /* VideoCamera.swift */,
+				09EDC8312287DD5600ACF621 /* PictureCamera.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +175,9 @@
 			files = (
 				09EDC8152287B28600ACF621 /* ViewController.swift in Sources */,
 				09EDC82A2287C68100ACF621 /* VideoPlayerDelegate.swift in Sources */,
+				09EDC8302287D99A00ACF621 /* VideoCamera.swift in Sources */,
+				09EDC8322287DD5600ACF621 /* PictureCamera.swift in Sources */,
+				09EDC82E2287D42A00ACF621 /* Camera.swift in Sources */,
 				09EDC8132287B28600ACF621 /* AppDelegate.swift in Sources */,
 				09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */,
 				09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */,

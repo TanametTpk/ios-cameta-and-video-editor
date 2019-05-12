@@ -6,11 +6,34 @@
 //  Copyright © 2562 Tanamet Tanasinpatcharakul. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import AVFoundation
+import AVKit
 
 class ViewController: UIViewController {
     
-    var player = VideoPlayer()
+    var camera:VideoCamera!
+    
+    var record:UIButton = {
+       
+        let view = UIButton(type: .system)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.setTitle("record", for: .normal)
+        return view
+        
+    }()
+    
+    var swap:UIButton = {
+        
+        let view = UIButton(type: .system)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.setTitle("swap", for: .normal)
+        return view
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,32 +41,65 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        camera = VideoCamera(delegate: self)
+        camera.setPreviewLayer(view: view)
+        camera.start()
+        
+        view.addSubview(record)
+        view.addSubview(swap)
+        record.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        record.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        record.addTarget(self, action: #selector(capture), for: .touchUpInside)
+        
+        swap.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
+        swap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        swap.addTarget(self, action: #selector(swapCamera), for: .touchUpInside)
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    @objc
+    private func capture(){
         
-        player.delegate = self
-        player.setVideoLayer(url: URL(string: "http://192.168.1.105:7000/videos/9000.mp4")!)
-        present(player, animated: true, completion: nil)
+        if !self.camera.videoOutput.isRecording{
+            record.setTitle("Stop", for: .normal)
+            camera.startRecord()
+        }else{
+            record.setTitle("Record", for: .normal)
+            camera.stopRecord()
+        }
         
     }
-
-    func setup(){
+    
+    @objc
+    private func swapCamera(){
+        
+        camera.swapCamera()
         
     }
     
 }
 
-extension ViewController: VideoPlayerDelegate{
+extension ViewController : AVCapturePhotoCaptureDelegate{
     
-    func videoDidEnd(){
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
-        player.replay()
+        if let imageData = photo.fileDataRepresentation(){
+            
+            UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
+            
+        }
         
     }
     
-    func observerProgess(seconds:Double , durationSeconds:Double , progess:Double){
+}
+
+extension ViewController : AVCaptureFileOutputRecordingDelegate{
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+
+        let controller = VideoPlayer()
+        controller.setVideoLayer(url: outputFileURL)
+        self.present(controller, animated: true, completion: nil)
         
     }
     
