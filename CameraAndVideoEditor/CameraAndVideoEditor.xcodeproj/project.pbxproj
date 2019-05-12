@@ -12,6 +12,8 @@
 		09EDC81A2287B28700ACF621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09EDC8192287B28700ACF621 /* Assets.xcassets */; };
 		09EDC81D2287B28700ACF621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09EDC81B2287B28700ACF621 /* LaunchScreen.storyboard */; };
 		09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8242287BB2300ACF621 /* VideoPlayer.swift */; };
+		09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8272287C65900ACF621 /* VideoLayer.swift */; };
+		09EDC82A2287C68100ACF621 /* VideoPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		09EDC81C2287B28700ACF621 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09EDC81E2287B28700ACF621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09EDC8242287BB2300ACF621 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		09EDC8272287C65900ACF621 /* VideoLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayer.swift; sourceTree = "<group>"; };
+		09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,24 @@
 		09EDC8112287B28600ACF621 /* CameraAndVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				09EDC8262287C62D00ACF621 /* VideoPlayer */,
 				09EDC8122287B28600ACF621 /* AppDelegate.swift */,
 				09EDC8142287B28600ACF621 /* ViewController.swift */,
 				09EDC8192287B28700ACF621 /* Assets.xcassets */,
 				09EDC81B2287B28700ACF621 /* LaunchScreen.storyboard */,
 				09EDC81E2287B28700ACF621 /* Info.plist */,
-				09EDC8242287BB2300ACF621 /* VideoPlayer.swift */,
 			);
 			path = CameraAndVideoEditor;
+			sourceTree = "<group>";
+		};
+		09EDC8262287C62D00ACF621 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				09EDC8242287BB2300ACF621 /* VideoPlayer.swift */,
+				09EDC8272287C65900ACF621 /* VideoLayer.swift */,
+				09EDC8292287C68100ACF621 /* VideoPlayerDelegate.swift */,
+			);
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +149,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09EDC8152287B28600ACF621 /* ViewController.swift in Sources */,
+				09EDC82A2287C68100ACF621 /* VideoPlayerDelegate.swift in Sources */,
 				09EDC8132287B28600ACF621 /* AppDelegate.swift in Sources */,
 				09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */,
+				09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

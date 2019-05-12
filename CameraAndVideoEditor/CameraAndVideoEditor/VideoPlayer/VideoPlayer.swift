@@ -32,7 +32,11 @@ class VideoPlayer:UIViewController {
     private func setup(){
         
         view.addSubview(videoLayer)
-        videoLayer.frame = view.frame
+        videoLayer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        videoLayer.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        videoLayer.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        videoLayer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         videoLayer.playerLayer.videoGravity = .resizeAspectFill
         
         videoLayer.playerLayer.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main, using: { (progressTime) in
@@ -62,8 +66,9 @@ class VideoPlayer:UIViewController {
     }
     
     public func setVideoLayer(url:URL){
-        
+
         videoLayer.playerLayer.player = AVPlayer(url: url)
+        play()
         
     }
     
@@ -136,37 +141,5 @@ class VideoPlayer:UIViewController {
         play()
         
     }
-    
-}
-
-class VideoLayer:UIView {
-    
-    override static var layerClass: AnyClass{
-        return AVPlayerLayer.self
-    }
-    
-    var playerLayer:AVPlayerLayer{
-        return layer as! AVPlayerLayer
-    }
-    
-    var player:AVPlayer? {
-        
-        get{
-            return playerLayer.player
-        }
-        
-        set {
-            playerLayer.player = newValue
-        }
-        
-    }
-    
-}
-
-protocol VideoPlayerDelegate {
-    
-    func videoDidEnd()
-    
-    func observerProgess(seconds:Double , durationSeconds:Double , progess:Double)
     
 }
