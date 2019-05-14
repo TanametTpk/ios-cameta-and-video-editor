@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09203918228A6EA600B1F2BA /* VideoCaptureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09203917228A6EA600B1F2BA /* VideoCaptureButton.swift */; };
+		0920391A228A989900B1F2BA /* CameraCaptureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09203919228A989900B1F2BA /* CameraCaptureButton.swift */; };
 		09EDC8132287B28600ACF621 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8122287B28600ACF621 /* AppDelegate.swift */; };
 		09EDC8152287B28600ACF621 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8142287B28600ACF621 /* ViewController.swift */; };
 		09EDC81A2287B28700ACF621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09EDC8192287B28700ACF621 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		09203917228A6EA600B1F2BA /* VideoCaptureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptureButton.swift; sourceTree = "<group>"; };
+		09203919228A989900B1F2BA /* CameraCaptureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureButton.swift; sourceTree = "<group>"; };
 		09EDC80F2287B28600ACF621 /* CameraAndVideoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraAndVideoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09EDC8122287B28600ACF621 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09EDC8142287B28600ACF621 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				09203917228A6EA600B1F2BA /* VideoCaptureButton.swift */,
+				09203919228A989900B1F2BA /* CameraCaptureButton.swift */,
 			);
 			path = CaptureButton;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */,
 				09EDC83A2288056E00ACF621 /* VideoTransform.swift in Sources */,
 				09203918228A6EA600B1F2BA /* VideoCaptureButton.swift in Sources */,
+				0920391A228A989900B1F2BA /* CameraCaptureButton.swift in Sources */,
 				09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */,
 				09EDC83E22881A2E00ACF621 /* StopMotion.swift in Sources */,
 			);

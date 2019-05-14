@@ -17,10 +17,10 @@ class ViewController: UIViewController {
     var camera:VideoCamera!
     var urls:[URL] = [URL]()
     var savedImage:[UIImage] = [UIImage]()
-    var recordButton:VideoCaptureButton = {
+    var recordButton:CameraCaptureButton = {
        
         let size = UIScreen.main.bounds.size.width / 5
-        let view = VideoCaptureButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        let view = CameraCaptureButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -80,20 +80,12 @@ class ViewController: UIViewController {
     @objc
     private func capture(){
 //        camera.capture()
-//        if !self.camera.videoOutput.isRecording{
-//            record.setTitle("Stop", for: .normal)
-//            camera.startRecord(tmpFile: "tmp-\(self.urls.count).mov")
-//        }else{
-//            record.setTitle("Record", for: .normal)
-//            camera.stopRecord()
-//        }
-
-        if !rec{
-            rec = true
+        if !self.camera.videoOutput.isRecording{
             recordButton.startRecord()
+            camera.startRecord(tmpFile: "tmp-\(self.urls.count).mov")
         }else{
-            rec = false
             recordButton.stopRecord()
+            camera.stopRecord()
         }
         
     }

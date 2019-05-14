@@ -48,7 +48,7 @@ class VideoCaptureButton: UIView {
         view.layer.shadowOpacity = 0.3
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.isHidden = true
+        view.alpha = 0
         
         return view
         
@@ -85,7 +85,6 @@ class VideoCaptureButton: UIView {
         setupContainer()
         setupRedDot()
         setupStopDot()
-        setupAnimation()
         
     }
     
@@ -112,60 +111,13 @@ class VideoCaptureButton: UIView {
         
     }
     
-    private func setupAnimation(){
-        
-        let scaleSize = container.frame.height / redDot.frame.height
-        let stopDotScaleSize = redDot.frame.height
-        
-        self.recordAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
-            
-            // red dot resize to same as container
-            self.redDot.transform = CGAffineTransform(scaleX: scaleSize, y: scaleSize)
-            self.container.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            
-        })
-        
-        self.showStopDotAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
-            
-            // hide container
-            self.container.isHidden = true
-            
-            // show stopDot
-            self.stopDot.isHidden = false
-            
-            self.stopDot.transform = CGAffineTransform(scaleX: stopDotScaleSize, y: stopDotScaleSize)
-            
-        })
-        
-        self.stopRecordAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
-            
-            // show container
-            self.container.isHidden = false
-            
-            // resize stopDot
-            self.stopDot.transform = CGAffineTransform.identity
-            
-        })
-        
-        self.backToIdentityAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
-            
-            self.stopDot.isHidden = true
-            
-            // red dot resize to identity
-            self.redDot.transform = CGAffineTransform.identity
-            self.container.transform = CGAffineTransform.identity
-            
-        })
-        
-    }
-    
     public func startRecord(){
         
         isRec = true
         let scaleSize = container.frame.height / redDot.frame.height
         let stopDotScaleSize = redDot.frame.height
         
-        self.recordAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
+        self.recordAnimator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: {
             
             // red dot resize to same as container
             self.redDot.transform = CGAffineTransform(scaleX: scaleSize, y: scaleSize)
@@ -179,7 +131,7 @@ class VideoCaptureButton: UIView {
             self.container.isHidden = true
             
             // show stopDot
-            self.stopDot.isHidden = false
+            self.stopDot.alpha = 1
             
             self.stopDot.transform = CGAffineTransform(scaleX: stopDotScaleSize, y: stopDotScaleSize)
             
@@ -187,7 +139,7 @@ class VideoCaptureButton: UIView {
         
         stopAnimation()
         self.recordAnimator?.startAnimation()
-        self.showStopDotAnimator?.startAnimation(afterDelay: 0.1)
+        self.showStopDotAnimator?.startAnimation(afterDelay: 0.3)
         
     }
     
@@ -205,9 +157,9 @@ class VideoCaptureButton: UIView {
             
         })
         
-        self.backToIdentityAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
+        self.backToIdentityAnimator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: {
             
-            self.stopDot.isHidden = true
+            self.stopDot.alpha = 0
             
             // red dot resize to identity
             self.redDot.transform = CGAffineTransform.identity
