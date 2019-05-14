@@ -17,6 +17,15 @@ class ViewController: UIViewController {
     var camera:VideoCamera!
     var urls:[URL] = [URL]()
     var savedImage:[UIImage] = [UIImage]()
+    var recordButton:VideoCaptureButton = {
+       
+        let size = UIScreen.main.bounds.size.width / 5
+        let view = VideoCaptureButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+        
+    }()
     
     var record:UIButton = {
        
@@ -49,11 +58,16 @@ class ViewController: UIViewController {
         camera.setPreviewLayer(view: view)
         camera.start()
         
-        view.addSubview(record)
+//        view.addSubview(record)
         view.addSubview(swap)
-        record.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        record.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        record.addTarget(self, action: #selector(capture), for: .touchUpInside)
+//        record.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+//        record.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        record.addTarget(self, action: #selector(capture), for: .touchUpInside)
+        
+        view.addSubview(recordButton)
+        let y = view.bounds.height - recordButton.bounds.height
+        recordButton.center = CGPoint(x: view.center.x, y: y)
+        recordButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(capture)))
         
         swap.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         swap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -61,15 +75,25 @@ class ViewController: UIViewController {
         
     }
     
+    var rec = false
+    
     @objc
     private func capture(){
 //        camera.capture()
-        if !self.camera.videoOutput.isRecording{
-            record.setTitle("Stop", for: .normal)
-            camera.startRecord(tmpFile: "tmp-\(self.urls.count).mov")
+//        if !self.camera.videoOutput.isRecording{
+//            record.setTitle("Stop", for: .normal)
+//            camera.startRecord(tmpFile: "tmp-\(self.urls.count).mov")
+//        }else{
+//            record.setTitle("Record", for: .normal)
+//            camera.stopRecord()
+//        }
+
+        if !rec{
+            rec = true
+            recordButton.startRecord()
         }else{
-            record.setTitle("Record", for: .normal)
-            camera.stopRecord()
+            rec = false
+            recordButton.stopRecord()
         }
         
     }
