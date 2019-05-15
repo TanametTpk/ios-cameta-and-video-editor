@@ -19,9 +19,18 @@ class Camera{
     var frontFacingCamera: AVCaptureDevice?
     var currentDevice: AVCaptureDevice?
     
-    var cameraPreviewLater: AVCaptureVideoPreviewLayer?
+    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    init() {
+    let minimumZoom: CGFloat = 1.0
+    var maximumZoom: CGFloat = 5.0
+    var lastZoomFactor: CGFloat = 1.0
+    
+    var videoView:UIView?
+    
+    init(maximumZoom:CGFloat = 5.0) {
+        
+        self.maximumZoom = maximumZoom
+        
         setupInput()
         setupSystem()
     }
@@ -73,8 +82,8 @@ class Camera{
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
             captureSession.addInput(captureDeviceInput)
             
-            cameraPreviewLater = AVCaptureVideoPreviewLayer(session:captureSession)
-            cameraPreviewLater?.videoGravity = .resizeAspectFill
+            cameraPreviewLayer = AVCaptureVideoPreviewLayer(session:captureSession)
+            cameraPreviewLayer?.videoGravity = .resizeAspectFill
             
         }catch {
             print(error)
@@ -111,8 +120,13 @@ class Camera{
     
     public func setPreviewLayer(view:UIView){
         
-        view.layer.addSublayer(cameraPreviewLater!)
-        cameraPreviewLater?.frame = view.layer.frame
+        view.layer.addSublayer(cameraPreviewLayer!)
+        
+        videoView = view
+        cameraPreviewLayer?.frame = view.layer.frame
+        
+        view.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(pinch)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touch)))
         
     }
     
@@ -122,6 +136,69 @@ class Camera{
     
     public func stop(){
         captureSession.stopRunning()
+    }
+    
+    @objc
+    func pinch(_ pinch: UIPinchGestureRecognizer) {
+
+        guard let device = currentDevice else { return }
+
+        // Return zoom value between the minimum and maximum zoom values
+        func minMaxZoom(_ factor: CGFloat) -> CGFloat {
+            return min(min(max(factor, minimumZoom), maximumZoom), device.activeFormat.videoMaxZoomFactor)
+        }
+
+        func update(scale factor: CGFloat) {
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                device.videoZoomFactor = factor
+            } catch {
+                print("\(error.localizedDescription)")
+            }
+        }
+
+        let newScaleFactor = minMaxZoom(pinch.scale * lastZoomFactor)
+
+        switch pinch.state {
+            case .began: fallthrough
+            case .changed: update(scale: newScaleFactor)
+            case .ended:
+                lastZoomFactor = minMaxZoom(newScaleFactor)
+                update(scale: lastZoomFactor)
+            default: break
+        }
+        
+    }
+    
+    @objc
+    func touch(_ touch: UITapGestureRecognizer) {
+
+        let screenSize = videoView!.bounds.size
+        
+        let x = touch.location(in: videoView).y / screenSize.height
+        let y = 1.0 - touch.location(in: videoView).x / screenSize.width
+        let focusPoint = CGPoint(x: x, y: y)
+        
+        if let device = currentDevice {
+            
+            do {
+                try device.lockForConfiguration()
+                
+                device.focusPointOfInterest = focusPoint
+                //device.focusMode = .continuousAutoFocus
+                device.focusMode = .autoFocus
+                //device.focusMode = .locked
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                device.unlockForConfiguration()
+            }
+            catch {
+                // just ignore
+            }
+            
+        }
+        
     }
     
 }
