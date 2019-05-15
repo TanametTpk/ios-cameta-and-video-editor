@@ -49,10 +49,12 @@ class VideoCamera:Camera{
         
         let url = FileManager.default.getTempFileUrl(path: tmpFile)
         videoOutput.startRecording(to: url, recordingDelegate: delegate)
+        startTimer()
         
     }
     
     public func stopRecord(){
+        stopTimer()
         videoOutput.stopRecording()
     }
     
@@ -68,6 +70,8 @@ class VideoCamera:Camera{
         
         // init timer
         self.timer = Timer(timeInterval: timeInterval, target: self, selector: #selector(tiktok), userInfo: nil, repeats: true)
+        
+        RunLoop.current.add(self.timer!, forMode: .common)
         
     }
     

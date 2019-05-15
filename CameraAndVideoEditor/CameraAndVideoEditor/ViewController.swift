@@ -13,10 +13,12 @@ import AVKit
 
 class ViewController: UIViewController {
     
+    let MAX_TIME:Double = 15
     let controller = VideoPlayer()
     var camera:VideoCamera!
     var urls:[URL] = [URL]()
     var savedImage:[UIImage] = [UIImage]()
+
     var recordButton:VideoCaptureButton = {
        
         let size = UIScreen.main.bounds.size.width / 5
@@ -44,6 +46,7 @@ class ViewController: UIViewController {
         controller.delegate = self
         
         camera = VideoCamera(delegate: self)
+        camera.timerDelegate = self
         camera.setPreviewLayer(view: view)
         camera.start()
         
@@ -135,6 +138,21 @@ extension ViewController: VideoPlayerDelegate {
     
     func videoDidEnd() {
         controller.replay()
+    }
+    
+}
+
+extension ViewController: TimerObservable{
+    
+    func observeTime(second: Double) {
+        
+        if second >= MAX_TIME {
+            
+            // stop
+            capture()
+            
+        }
+        
     }
     
 }
