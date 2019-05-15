@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import AVKit
+import Photos
 
 class ViewController: UIViewController {
     
@@ -18,6 +19,15 @@ class ViewController: UIViewController {
     var camera:VideoCamera!
     var urls:[URL] = [URL]()
     var savedImage:[UIImage] = [UIImage]()
+    
+    var imageButton:UIImageView = {
+        
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        return view
+        
+    }()
 
     var recordButton:VideoCaptureButton = {
        
@@ -60,6 +70,58 @@ class ViewController: UIViewController {
         swap.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         swap.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         swap.addTarget(self, action: #selector(swapCamera), for: .touchUpInside)
+        
+        view.addSubview(imageButton)
+        imageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor , constant: -20).isActive = true
+        imageButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        imageButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        imageButton.widthAnchor.constraint(equalTo: imageButton.heightAnchor).isActive = true
+        
+        test()
+        
+    }
+    
+    func test(){
+        
+        PHPhotoLibrary.requestAuthorization { (status) in
+            
+            if status == .authorized {
+                
+                let fetchOptions = PHFetchOptions()
+                fetchOptions.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+                
+                fetchOptions.fetchLimit = 1
+                
+                let fetchResult:PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+                
+                if fetchResult.count > 0 {
+                              
+                    DispatchQueue.main.async {
+                        self.getImage(index: 0, result: fetchResult)
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    func getImage(index:Int , result:PHFetchResult<PHAsset>){
+        
+        let requestOption = PHImageRequestOptions()
+        requestOption.isSynchronous = true
+        
+        PHImageManager.default().requestImage(for: result.object(at: index), targetSize: view.frame.size, contentMode: .aspectFill, options: requestOption) { (image, _) in
+            
+            DispatchQueue.main.async {
+                // image here
+                self.imageButton.image = image
+            }
+            
+        }
         
     }
     
