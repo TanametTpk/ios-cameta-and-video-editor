@@ -83,45 +83,22 @@ class ViewController: UIViewController {
     
     func test(){
         
-        PHPhotoLibrary.requestAuthorization { (status) in
+        let filesystem = PhotoFileSystem(targetSize: view.frame.size )
+        filesystem.setLimit(limit: 1)
+        filesystem.get(index: 0) { (image, status) in
             
             if status == .authorized {
                 
-                let fetchOptions = PHFetchOptions()
-                fetchOptions.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+                guard let image = image else {return}
                 
-                fetchOptions.fetchLimit = 1
-                
-                let fetchResult:PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
-                
-                if fetchResult.count > 0 {
-                              
-                    DispatchQueue.main.async {
-                        self.getImage(index: 0, result: fetchResult)
-                    }
-                    
+                DispatchQueue.main.async {
+                    self.imageButton.image = image
                 }
                 
-                
             }
             
         }
         
-    }
-    
-    func getImage(index:Int , result:PHFetchResult<PHAsset>){
-        
-        let requestOption = PHImageRequestOptions()
-        requestOption.isSynchronous = true
-        
-        PHImageManager.default().requestImage(for: result.object(at: index), targetSize: view.frame.size, contentMode: .aspectFill, options: requestOption) { (image, _) in
-            
-            DispatchQueue.main.async {
-                // image here
-                self.imageButton.image = image
-            }
-            
-        }
         
     }
     

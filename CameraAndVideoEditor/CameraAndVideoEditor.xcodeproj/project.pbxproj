@@ -25,6 +25,8 @@
 		09EDC83A2288056E00ACF621 /* VideoTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8392288056E00ACF621 /* VideoTransform.swift */; };
 		09EDC83C228816E300ACF621 /* VideoReverser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC83B228816E300ACF621 /* VideoReverser.swift */; };
 		09EDC83E22881A2E00ACF621 /* StopMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC83D22881A2E00ACF621 /* StopMotion.swift */; };
+		09FA6D30228C35AD00415953 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA6D2F228C35AD00415953 /* FileSystem.swift */; };
+		09FA6D32228C3C6200415953 /* PhotoFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA6D31228C3C6200415953 /* PhotoFileSystem.swift */; };
 		09FF3185228BB90800AB9506 /* TimerObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF3184228BB90800AB9506 /* TimerObservable.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		09EDC8392288056E00ACF621 /* VideoTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransform.swift; sourceTree = "<group>"; };
 		09EDC83B228816E300ACF621 /* VideoReverser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReverser.swift; sourceTree = "<group>"; };
 		09EDC83D22881A2E00ACF621 /* StopMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMotion.swift; sourceTree = "<group>"; };
+		09FA6D2F228C35AD00415953 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
+		09FA6D31228C3C6200415953 /* PhotoFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFileSystem.swift; sourceTree = "<group>"; };
 		09FF3184228BB90800AB9506 /* TimerObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +104,8 @@
 				09EDC8192287B28700ACF621 /* Assets.xcassets */,
 				09EDC81B2287B28700ACF621 /* LaunchScreen.storyboard */,
 				09EDC81E2287B28700ACF621 /* Info.plist */,
+				09FA6D2F228C35AD00415953 /* FileSystem.swift */,
+				09FA6D31228C3C6200415953 /* PhotoFileSystem.swift */,
 			);
 			path = CameraAndVideoEditor;
 			sourceTree = "<group>";
@@ -218,11 +224,13 @@
 				09EDC8322287DD5600ACF621 /* PictureCamera.swift in Sources */,
 				09EDC82E2287D42A00ACF621 /* Camera.swift in Sources */,
 				09EDC8382288040F00ACF621 /* FileManager.swift in Sources */,
+				09FA6D30228C35AD00415953 /* FileSystem.swift in Sources */,
 				09EDC8132287B28600ACF621 /* AppDelegate.swift in Sources */,
 				09EDC8252287BB2300ACF621 /* VideoPlayer.swift in Sources */,
 				09EDC83A2288056E00ACF621 /* VideoTransform.swift in Sources */,
 				09203918228A6EA600B1F2BA /* VideoCaptureButton.swift in Sources */,
 				0920391A228A989900B1F2BA /* CameraCaptureButton.swift in Sources */,
+				09FA6D32228C3C6200415953 /* PhotoFileSystem.swift in Sources */,
 				09EDC8282287C65900ACF621 /* VideoLayer.swift in Sources */,
 				09EDC83E22881A2E00ACF621 /* StopMotion.swift in Sources */,
 			);
