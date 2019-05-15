@@ -17,22 +17,12 @@ class ViewController: UIViewController {
     var camera:VideoCamera!
     var urls:[URL] = [URL]()
     var savedImage:[UIImage] = [UIImage]()
-    var recordButton:CameraCaptureButton = {
+    var recordButton:VideoCaptureButton = {
        
         let size = UIScreen.main.bounds.size.width / 5
-        let view = CameraCaptureButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        let view = VideoCaptureButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        return view
-        
-    }()
-    
-    var record:UIButton = {
-       
-        let view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isUserInteractionEnabled = true
-        view.setTitle("record", for: .normal)
         return view
         
     }()
@@ -58,11 +48,7 @@ class ViewController: UIViewController {
         camera.setPreviewLayer(view: view)
         camera.start()
         
-//        view.addSubview(record)
         view.addSubview(swap)
-//        record.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-//        record.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        record.addTarget(self, action: #selector(capture), for: .touchUpInside)
         
         view.addSubview(recordButton)
         let y = view.bounds.height - recordButton.bounds.height
@@ -104,8 +90,6 @@ extension ViewController : AVCapturePhotoCaptureDelegate{
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
         if let imageData = photo.fileDataRepresentation(){
-            
-//            UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
             
             savedImage.append(UIImage(data: imageData)!)
             
