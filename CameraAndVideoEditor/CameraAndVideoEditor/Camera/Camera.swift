@@ -201,4 +201,63 @@ class Camera{
         
     }
     
+    public func turnOnFlash(){
+        
+        guard let avDevice = currentDevice else{return}
+        
+        // check if the device has torch
+        if avDevice.hasTorch {
+            
+            // lock your device for configuration
+            do {
+                try avDevice.lockForConfiguration()
+            } catch {
+
+            }
+            
+            // check if your torchMode is on or off. If on turns it off otherwise turns it on
+            if !avDevice.isTorchActive {
+                
+                do {
+                    
+                    try avDevice.setTorchModeOn(level: 1.0)
+                    
+                } catch {
+                    
+                }
+                
+            }
+            // unlock your device
+            avDevice.unlockForConfiguration()
+        }
+        
+    }
+    
+    public func turnOffFlash(){
+        
+        guard let avDevice = currentDevice else{return}
+        
+        // check if the device has torch
+        if avDevice.hasTorch {
+            
+            // lock your device for configuration
+            do {
+                try avDevice.lockForConfiguration()
+            } catch {
+
+            }
+            
+            // check if your torchMode is on or off. If on turns it off otherwise turns it on
+            if avDevice.isTorchActive {
+                
+                avDevice.torchMode = AVCaptureDevice.TorchMode.off
+                
+            }
+            
+            // unlock your device
+            avDevice.unlockForConfiguration()
+        }
+        
+    }
+    
 }
