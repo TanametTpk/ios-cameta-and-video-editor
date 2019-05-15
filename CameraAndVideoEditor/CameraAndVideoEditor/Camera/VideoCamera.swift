@@ -17,6 +17,11 @@ class VideoCamera:Camera{
     var videoOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     
     var delegate: AVCaptureFileOutputRecordingDelegate!
+    var timerDelegate: TimerObservable?
+    
+    var timer:Timer?
+    var second:Double = 0
+    var timeInterval:Double = 0.1
     
     init(delegate:AVCaptureFileOutputRecordingDelegate) {
         
@@ -49,6 +54,38 @@ class VideoCamera:Camera{
     
     public func stopRecord(){
         videoOutput.stopRecording()
+    }
+    
+    private func startTimer(){
+        
+        // if already have timer stop it
+        if self.timer != nil {
+            stopTimer()
+        }
+        
+        // set time to 0
+        second = 0
+        
+        // init timer
+        self.timer = Timer(timeInterval: timeInterval, target: self, selector: #selector(tiktok), userInfo: nil, repeats: true)
+        
+    }
+    
+    private func stopTimer(){
+        
+        if self.timer != nil {
+            self.timer?.invalidate()
+            self.timer = nil
+        }
+        
+    }
+    
+    @objc
+    private func tiktok(){
+        
+        second += timeInterval
+        self.timerDelegate?.observeTime(second: second)
+        
     }
     
 }

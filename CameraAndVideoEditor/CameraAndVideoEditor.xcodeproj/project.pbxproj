@@ -25,6 +25,7 @@
 		09EDC83A2288056E00ACF621 /* VideoTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC8392288056E00ACF621 /* VideoTransform.swift */; };
 		09EDC83C228816E300ACF621 /* VideoReverser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC83B228816E300ACF621 /* VideoReverser.swift */; };
 		09EDC83E22881A2E00ACF621 /* StopMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDC83D22881A2E00ACF621 /* StopMotion.swift */; };
+		09FF3185228BB90800AB9506 /* TimerObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF3184228BB90800AB9506 /* TimerObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		09EDC8392288056E00ACF621 /* VideoTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransform.swift; sourceTree = "<group>"; };
 		09EDC83B228816E300ACF621 /* VideoReverser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReverser.swift; sourceTree = "<group>"; };
 		09EDC83D22881A2E00ACF621 /* StopMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMotion.swift; sourceTree = "<group>"; };
+		09FF3184228BB90800AB9506 /* TimerObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				09EDC82D2287D42A00ACF621 /* Camera.swift */,
 				09EDC82F2287D99A00ACF621 /* VideoCamera.swift */,
 				09EDC8312287DD5600ACF621 /* PictureCamera.swift */,
+				09FF3184228BB90800AB9506 /* TimerObservable.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				09EDC83C228816E300ACF621 /* VideoReverser.swift in Sources */,
 				09EDC8152287B28600ACF621 /* ViewController.swift in Sources */,
 				09EDC8362288019500ACF621 /* VideoMerger.swift in Sources */,
+				09FF3185228BB90800AB9506 /* TimerObservable.swift in Sources */,
 				09EDC8342288006A00ACF621 /* VideoEditor.swift in Sources */,
 				09EDC82A2287C68100ACF621 /* VideoPlayerDelegate.swift in Sources */,
 				09EDC8302287D99A00ACF621 /* VideoCamera.swift in Sources */,

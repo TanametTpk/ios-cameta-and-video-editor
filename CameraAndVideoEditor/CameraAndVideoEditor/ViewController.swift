@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         
         let view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.isUserInteractionEnabled = true
         view.setTitle("swap", for: .normal)
         return view
         
@@ -60,8 +59,6 @@ class ViewController: UIViewController {
         swap.addTarget(self, action: #selector(swapCamera), for: .touchUpInside)
         
     }
-    
-    var rec = false
     
     @objc
     private func capture(){
